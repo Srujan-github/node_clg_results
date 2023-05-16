@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>College Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1 class="text-center">College Results</h1>
+    <br><br>
+    <center>
+    <form action="/res" method="POST">
+        <input type="text" id="input" name="hallNo" placeholder="Enter your hallticket no:-">
+    <button type="submit">Submit</button>
+         
+      </form></center>
+      <div class="container">
+    <% if (bol) { %>
+       
+        <h2 class="invisible" >Submitted Value:</h2>
+        <p class="invisible"><%= hallNo %></p>
+        <table class="table table-bordered invisible"  id="tab1"  >
+            <thead>
+              <tr>
+               
+                <th scope="col">HTNO</th>
+                <th scope="col">NAME</th>
+                <th scope="col">FATHER NAME</th>
+                <th scope="col">COLLEGE CODE</th>
+              </tr>
+            </thead>
+            <tbody id="table_body">
+             
+              
+            </tbody>
+             
+            
+             </table>
+        <% }else{ %>
+            <h2 >Submitted Value:</h2>
+            <p><%= hallNo %></p>
+            <h4 class="text-center">OVERALL_CGPA:- <%= all_gpa%></h4>  
+            <table class="table table-bordered"  id="tab1"  >
+                <thead>
+                  <tr>
+                   
+                    <th scope="col">HTNO</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">FATHER NAME</th>
+                    <th scope="col">COLLEGE CODE</th>
+                  </tr>
+                </thead>
+                <tbody id="table_body">
+                    <tr>
+                        <td><%=tab1['HTNO']%></td>
+                        <td><%=tab1['NAME']%></td>
+                        <td><%=tab1['FATHER NAME']%></td>
+                        <td><%=tab1['COLLEGE CODE']%></td>
+                      </tr>
+                  
+                </tbody>
+                 </table>
+                    <% if(all_res[0]['1-1']){ %>
+                        <% let value=all_res[0]['1-1'] %>
+                        <% let SGPA=all_res[0]['SGPA'] %>
+                        <% console.log(all_res[0]['1-1'])%>
+                 <table class="table table-bordered" id="tableSem1_1">
+                    <thead >
+                        <tr >
+                         
+                          <th scope="col" class="table-primary" >1-1 Semster</th>
+                          
+                        </tr>
+                      </thead>
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">subject_code</th>
+                        <th scope="col">subject_name</th>
+                        <th scope="col">subject_credits</th>
+                        <th scope="col">grade_earned</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table_body_1_1">
+                        <% Object.keys(value).forEach((k) => { %>
+                            <tr>
+                              <td><%= value[k].subject_code %></td>
+                              <td><%= value[k].subject_name %></td>
+                              <td><%= value[k].subject_credits %></td>
+                              <td><%= value[k].grade_earned %></td>
+                            </tr>
+                          <% }) %>
+                    <%if(SGPA){%>
+                    <tr class="table-success ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td><%=SGPA%></td>
+                        </tr>
+                    <% }else{ %>
+                    <tr class="table-danger ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td>FAIL</td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                    
+                </table>
+                     <%}%>
+    <%}%>
+</div>
+  </body>
+</html>
