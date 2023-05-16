@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   const hallNo="-1";
   const bol=true;
   const tab1="";
-  const all_gpa="";
+  const all_gpa="FAIL";
   const all_res="";
   // Render the HTML template and pass the data
   res.render('index', {  bol,hallNo,tab1,  all_gpa, all_res});
@@ -27,7 +27,7 @@ try{
       const details = result.data.details;
       const overall_gpa = result.data.overall_gpa;
       const results = result.data.results;
-      all_gpa=overall_gpa;
+      all_gpa=overall_gpa?overall_gpa:"FAIL";
       tab1=details;
       all_res=results;
     }else{
