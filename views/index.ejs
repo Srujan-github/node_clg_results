@@ -9,37 +9,26 @@
     <h1 class="text-center">College Results</h1>
     <br><br>
     <center>
-    <form action="/res" method="POST">
+    <form action="/re" method="post">
         <input type="text" id="input" name="hallNo" placeholder="Enter your hallticket no:-">
+        
     <button type="submit">Submit</button>
-         
+   
       </form></center>
       <div class="container">
+        <!-- <div class=" 'spinner-border text-primary position-absolute top-0 end-0':'invisible spinner-border text-primary position-absolute top-0 end-0'%>" role="">
+        
+        </div> -->
     <% if (bol) { %>
-       
+       <%console.log(bol);%>
         <h2 class="invisible" >Submitted Value:</h2>
         <p class="invisible"><%= hallNo %></p>
-        <table class="table table-bordered invisible"  id="tab1"  >
-            <thead>
-              <tr>
-               
-                <th scope="col">HTNO</th>
-                <th scope="col">NAME</th>
-                <th scope="col">FATHER NAME</th>
-                <th scope="col">COLLEGE CODE</th>
-              </tr>
-            </thead>
-            <tbody id="table_body">
-             
-              
-            </tbody>
-             
-            
-             </table>
+       
         <% }else{ %>
              <p></p>
             <h4 class="text-center">OVERALL_CGPA:- <%= all_gpa%></h4>  
             <p></p>
+            <% if(tab1) {%>
             <table class="table table-bordered"  id="tab1"  >
                 <thead>
                   <tr>
@@ -60,12 +49,13 @@
                   
                 </tbody>
                  </table>
+                 <% } %>
                     <% if(all_res[0] ){ %>
                         <% let value=all_res[0]['1-1'] %>
                         <% let SGPA=all_res[0]['SGPA'] %>
-                        <% console.log(all_res[0]['1-1'])%>
+                       
                  <table class="table table-bordered" id="tableSem1_1">
-                    <thead >
+                    <thead>
                         <tr >
                          
                           <th scope="col" class="table-primary" >1-1 Semster</th>
@@ -113,7 +103,7 @@
                     <% if(all_res[1] ){ %>
                         <% let value=all_res[1]['1-2'] %>
                         <% let SGPA=all_res[1]['SGPA'] %>
-                        <% console.log(all_res[1]['1-2'])%>
+                        
                  <table class="table table-bordered" id="tableSem1_1">
                     <thead >
                         <tr >
@@ -163,7 +153,7 @@
                     <% if(all_res[2] ){ %>
                         <% let value=all_res[2]['2-1'] %>
                         <% let SGPA=all_res[2]['SGPA'] %>
-                        <% console.log(all_res[1]['1-2'])%>
+                        
                  <table class="table table-bordered" id="tableSem1_1">
                     <thead >
                         <tr >
@@ -213,7 +203,7 @@
                     <% if(all_res[3] ){ %>
                         <% let value=all_res[3]['2-2'] %>
                         <% let SGPA=all_res[3]['SGPA'] %>
-                        <% console.log(all_res[1]['1-2'])%>
+                       
                  <table class="table table-bordered" id="tableSem1_1">
                     <thead >
                         <tr >
@@ -263,7 +253,7 @@
                     <% if(all_res[4] ){ %>
                         <% let value=all_res[4]['3-1'] %>
                         <% let SGPA=all_res[4]['SGPA'] %>
-                        <% console.log(all_res[1]['1-2'])%>
+                       
                  <table class="table table-bordered" id="tableSem1_1">
                     <thead >
                         <tr >
@@ -313,7 +303,7 @@
                     <% if(all_res[5] ){ %>
                         <% let value=all_res[5]['3-2'] %>
                         <% let SGPA=all_res[5]['SGPA'] %>
-                        <% console.log(all_res[1]['1-2'])%>
+                       
                  <table class="table table-bordered" id="tableSem1_1">
                     <thead >
                         <tr >
@@ -363,8 +353,7 @@
                     <% if(all_res[6] ){ %>
                         <% let value=all_res[6]['4-1'] %>
                         <% let SGPA=all_res[6]['SGPA'] %>
-                        <% console.log(all_res[1]['1-2'])%>
-                        <% console.log(all_res.length)%>
+                         
                  <table class="table table-bordered" id="tableSem1_1">
                     <thead >
                         <tr >
