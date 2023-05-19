@@ -49,7 +49,9 @@ try{
     res.status(400).render('404');
 }}
   );
-
+// app.get("/test",(req,res)=>{
+//   res.render('test')
+// })
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
