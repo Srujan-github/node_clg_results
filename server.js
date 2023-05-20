@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 // Define a route to render the HTML page
 app.get('/', (req, res) => {
   let hallNo="-1";
@@ -18,6 +20,7 @@ app.get('/', (req, res) => {
   res.render('index', {  bol,hallNo,tab1,  all_gpa, all_res });
 });
 app.post('/re', async(req, res) => {
+  const url="https://github.com/Srujan-github/node_clg_results";
 try{
   // res.render('loading');
     const hallNo = req.body.hallNo;
@@ -44,9 +47,9 @@ try{
     // console.log('Hall Ticket Number:', hallNo);
     // console.log(all_res[0]['1-1']);
     if(all_res[0]['1-1'])
-    res.render('index', {bol,hallNo,tab1,all_gpa,all_res });
+    res.render('index', {bol,hallNo,tab1,all_gpa,all_res,url });
     else
-    res.render('lateral',{bol,hallNo,tab1,all_gpa,all_res });
+    res.render('lateral',{bol,hallNo,tab1,all_gpa,all_res,url });
     // res.send('Received Hall Ticket Number: ' + hallNo);
   }catch(err){
     console.log(err);
