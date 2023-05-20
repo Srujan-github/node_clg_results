@@ -41,8 +41,8 @@ try{
     bol=false;
    
     // Process the hallNo value as needed
-    console.log('Hall Ticket Number:', hallNo);
-    console.log(all_res[0]['1-1']);
+    // console.log('Hall Ticket Number:', hallNo);
+    // console.log(all_res[0]['1-1']);
     if(all_res[0]['1-1'])
     res.render('index', {bol,hallNo,tab1,all_gpa,all_res });
     else
