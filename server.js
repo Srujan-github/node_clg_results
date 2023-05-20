@@ -42,7 +42,11 @@ try{
    
     // Process the hallNo value as needed
     console.log('Hall Ticket Number:', hallNo);
+    console.log(all_res[0]['1-1']);
+    if(all_res[0]['1-1'])
     res.render('index', {bol,hallNo,tab1,all_gpa,all_res });
+    else
+    res.render('lateral',{bol,hallNo,tab1,all_gpa,all_res });
     // res.send('Received Hall Ticket Number: ' + hallNo);
   }catch(err){
     console.log(err);
