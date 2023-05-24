@@ -58,7 +58,14 @@ try{
     res.status(400).render('404');
 }}
   );
-
+app.get('/team',(req,res)=>{
+    const sai={"twitter":"https://twitter.com/thammishettisa1","linkedin":"https://www.linkedin.com/in/sai-srujan-thammishetti-25493920b/","github":"https://github.com/Srujan-github","mail":"mailto:thammishettisaisrujan123@gmail.com"};
+    const raja={"twitter":"https://twitter.com/Rajashekar_82","linkedin":"https://www.linkedin.com/in/nerellarajashekar","github":" http://github.com/Rajashekar-582","mail":"mailto:nerellarajashekar458@gmail.com"};
+    const vamshi={"twitter":"https://twitter.com/VamshiKrishna9_","linkedin":"https://www.linkedin.com/in/peddi-vamshi-krishna-4748671b1/","github":"https://github.com/VamshiKrishna-Peddi","mail":"mailto:vamshikrishnapeddi34129@gmail.com"};
+    const srimith={"twitter":"https://twitter.com/vojjalasrimith","linkedin":"https://www.linkedin.com/in/vojjala-srimith-293393226","github":"http://github.com/Srimithvojjala","mail":"mailto:vsrimith@gmail.com"};
+    const pramod={"twitter":"#","linkedin":"https://www.linkedin.com/in/pramod-swargam-22b266227/","github":"https://github.com/Pramod556","mail":"mailto:pramodhswargam@gmail.com"};
+    res.render('team',{sai,raja,vamshi,srimith,pramod});
+})
  
 // app.get("/test",(req,res)=>{
 //   res.render('test')
