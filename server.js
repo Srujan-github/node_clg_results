@@ -4,7 +4,8 @@ const path = require('path');
 const ejs = require('ejs');
 const pdf = require('html-pdf');
 const bodyParser = require('body-parser');
-const port = process.env.PORT || 3000;
+const { jsPDF } = require('jspdf');
+const port = process.env.PORT || 4000;
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
   const all_gpa="FAIL";
   const all_res="";
   // Render the HTML template and pass the data
-  res.render('index', {  bol,hallNo,tab1,  all_gpa, all_res });
+  res.render('index', {  bol,hallNo,tab1,  all_gpa, all_res ,jsPDF});
 });
 app.get('/result', async(req, res) => {
   const url="https://github.com/Srujan-github/node_clg_results";
@@ -49,9 +50,9 @@ try{
     // console.log('Hall Ticket Number:', hallNo);
     // console.log(all_res[0]['1-1']);
     if(all_res[0]['1-1'])
-    res.render('index', {bol,hallNo,tab1,all_gpa,all_res,url });
+    res.render('index', {bol,hallNo,tab1,all_gpa,all_res,url,jsPDF });
     else
-    res.render('lateral',{bol,hallNo,tab1,all_gpa,all_res,url });
+    res.render('lateral',{bol,hallNo,tab1,all_gpa,all_res,url,jsPDF });
     // res.send('Received Hall Ticket Number: ' + hallNo);
   }catch(err){
     console.log(err);
