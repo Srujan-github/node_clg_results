@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const ejs = require('ejs');
+const pdf = require('html-pdf');
 const bodyParser = require('body-parser');
-const port = process.env.PORT || 3000;
+const { jsPDF } = require('jspdf');
+const port = process.env.PORT || 4000;
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
@@ -17,13 +20,13 @@ app.get('/', (req, res) => {
   const all_gpa="FAIL";
   const all_res="";
   // Render the HTML template and pass the data
-  res.render('index', {  bol,hallNo,tab1,  all_gpa, all_res });
+  res.render('index', {  bol,hallNo,tab1,  all_gpa, all_res ,jsPDF});
 });
-app.post('/re', async(req, res) => {
+app.get('/result', async(req, res) => {
   const url="https://github.com/Srujan-github/node_clg_results";
 try{
   // res.render('loading');
-    const hallNo = req.body.hallNo;
+    const hallNo = req.query.hallNo;
     const response = await fetch(`https://results-restapi.up.railway.app/all-r18/${hallNo}`);
     const result = await response.json();
   
@@ -47,15 +50,17 @@ try{
     // console.log('Hall Ticket Number:', hallNo);
     // console.log(all_res[0]['1-1']);
     if(all_res[0]['1-1'])
-    res.render('index', {bol,hallNo,tab1,all_gpa,all_res,url });
+    res.render('index', {bol,hallNo,tab1,all_gpa,all_res,url,jsPDF });
     else
-    res.render('lateral',{bol,hallNo,tab1,all_gpa,all_res,url });
+    res.render('lateral',{bol,hallNo,tab1,all_gpa,all_res,url,jsPDF });
     // res.send('Received Hall Ticket Number: ' + hallNo);
   }catch(err){
     console.log(err);
     res.status(400).render('404');
 }}
   );
+
+ 
 // app.get("/test",(req,res)=>{
 //   res.render('test')
 // })

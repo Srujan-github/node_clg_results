@@ -1,0 +1,27 @@
+.download-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#download {
+    background-color: rgb(18, 18, 96);
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    padding: auto 2px;
+    margin-right: 40%;
+    margin-left: 40%;
+    transition: 1s;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+#download:hover {
+    cursor: pointer;
+    background-color: rgb(6, 6, 40);
+
+
+}
