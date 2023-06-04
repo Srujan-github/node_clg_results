@@ -10,8 +10,12 @@
 </head>
   <body>
     
-    <h1 class="text-center">College Results</h1>
-    <br><br>
+    <p class="text-center"><img src="/img/scit.jpg" alt="" srcset=""></p>
+     
+    <h2 class="text-center">College Results</h2>
+   
+     
+    <br> 
      
       <div class="text-center">
     <form action="/result" method="get">
@@ -549,6 +553,14 @@
                             }
                           }
                         });
+                      </script>
+                      <br>
+                       <p class="text-center"><button type="button" class="btn btn-primary" onclick="downloadPage()">Download</button></p>
+                       <script>
+                        function downloadPage() {
+                          window.print();
+                          //window.location.href = '/download';
+                        }
                       </script>
                        <p></p>
                        <div  class="text-center" >@Made with ❤ by <a href="/team">Team Invisible</a> </div>
