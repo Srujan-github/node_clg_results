@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>College Results</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <link rel="icon" type="image/png"  href=" /img/stats.png"  >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+</head>
+  <body>
+    <p class="text-center"><img src="/img/scit.jpg" alt="" srcset=""></p>
+     
+    <h2 class="text-center">College Results</h2>
+   
+     <br>
+      <div class="text-center">
+    <form action="/result" method="get">
+        <input type="text" id="input" name="hallNo" placeholder="Enter your hallticket no:-" required>
+        
+    <button type="submit">Submit</button>
+   
+      </form></div> 
+
+      
+       
+      <div class="container">
+        <!-- <div class=" 'spinner-border text-primary position-absolute top-0 end-0':'invisible spinner-border text-primary position-absolute top-0 end-0'%>" role="">
+        
+        </div> -->
+    <% if (bol) { %>
+       <%console.log(bol);%>
+       
+       
+        <% }else{ %>
+             <p></p>
+            
+            <% if(all_gpa!="FAIL"){ %>
+              <h4 class="text-center text-primary">OVERALL_CGPA:- <%= all_gpa%></h4>  
+              <div class="text-center text-success">
+                <h5>
+                  Percentage:- <%= parseFloat((all_gpa-0.5)*10).toFixed(2) %>%
+                </h5>
+              </div>
+
+              <%}else{%>
+                <h4 class="text-center text-danger">OVERALL_CGPA:- <%= all_gpa%></h4>  
+                <% } %>
+            <p></p>
+            <% let all_sgpa=0,c=0;%>
+            <%const sgpaArr=[]%>
+            <% if(tab1) {%>
+            <table class="table table-bordered"  id="tab1"  >
+                <thead>
+                  <tr>
+                   
+                    <th scope="col">HTNO</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">FATHER NAME</th>
+                    <th scope="col">COLLEGE CODE</th>
+                  </tr>
+                </thead>
+                <tbody id="table_body">
+                    <tr>
+                        <td><%=tab1['HTNO']%></td>
+                        <td><%=tab1['NAME']%></td>
+                        <td><%=tab1['FATHER NAME']%></td>
+                        <td><%=tab1['COLLEGE CODE']%></td>
+                      </tr>
+                  
+                </tbody>
+                 </table>
+                 <% } %>
+                    <% if(all_res[0] ){ %>
+                        <% let value=all_res[0]['1-2'] %>
+                        <% let SGPA=all_res[0]['SGPA'] %>
+                       
+                 <table class="table table-bordered" id="tableSem1_1">
+                    <thead>
+                        <tr >
+                         
+                          <th scope="col" class="table-primary" >1-2 Semster</th>
+                          
+                        </tr>
+                      </thead>
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">subject_code</th>
+                        <th scope="col">subject_name</th>
+                        <th scope="col">subject_credits</th>
+                        <th scope="col">grade_earned</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table_body_1_1">
+                        <% Object.keys(value).forEach((k) => { %>
+                            <tr>
+                              <td><%= value[k].subject_code %></td>
+                              <td><%= value[k].subject_name %></td>
+                              <td><%= value[k].subject_credits %></td>
+                              <td><%= value[k].grade_earned %></td>
+                            </tr>
+                            
+                            
+                          <% }) %>
+                    <%if(SGPA){%>
+                      <% all_sgpa+=parseFloat(SGPA);c+=1; %>
+                      <% sgpaArr.push(parseFloat(SGPA));%>
+                    <tr class="table-success ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td><%=SGPA%></td>
+                        </tr>
+                    <% }else{ %>
+                      <% sgpaArr.push(0);%>
+                    <tr class="table-danger ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td>FAIL</td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                    
+                </table>
+                     <%}%>
+                   
+                     <!-- sem 1-2 -->
+                    <% if(all_res[1] ){ %>
+                        <% let value=all_res[1]['2-1'] %>
+                        <% let SGPA=all_res[1]['SGPA'] %>
+                        
+                 <table class="table table-bordered" id="tableSem1_1">
+                    <thead >
+                        <tr >
+                         
+                          <th scope="col" class="table-primary" >2-1 Semster</th>
+                          
+                        </tr>
+                      </thead>
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">subject_code</th>
+                        <th scope="col">subject_name</th>
+                        <th scope="col">subject_credits</th>
+                        <th scope="col">grade_earned</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table_body_1_1">
+                        <% Object.keys(value).forEach((k) => { %>
+                            <tr>
+                              <td><%= value[k].subject_code %></td>
+                              <td><%= value[k].subject_name %></td>
+                              <td><%= value[k].subject_credits %></td>
+                              <td><%= value[k].grade_earned %></td>
+                            </tr>
+                          <% }) %>
+                    <%if(SGPA){%>
+                      <% all_sgpa+=parseFloat(SGPA);c+=1;%>
+                      <% sgpaArr.push(parseFloat(SGPA));%>
+                    <tr class="table-success ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td><%=SGPA%></td>
+                        </tr>
+                    <% }else{ %>
+                      <% sgpaArr.push(0);%>
+                    <tr class="table-danger ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td>FAIL</td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                    
+                </table>
+                     <%}%>
+                     <!-- sem 2-1 -->
+                    <% if(all_res[2] ){ %>
+                        <% let value=all_res[2]['2-2'] %>
+                        <% let SGPA=all_res[2]['SGPA'] %>
+                        
+                 <table class="table table-bordered" id="tableSem1_1">
+                    <thead >
+                        <tr >
+                         
+                          <th scope="col" class="table-primary" >2-2 Semster</th>
+                          
+                        </tr>
+                      </thead>
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">subject_code</th>
+                        <th scope="col">subject_name</th>
+                        <th scope="col">subject_credits</th>
+                        <th scope="col">grade_earned</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table_body_1_1">
+                        <% Object.keys(value).forEach((k) => { %>
+                            <tr>
+                              <td><%= value[k].subject_code %></td>
+                              <td><%= value[k].subject_name %></td>
+                              <td><%= value[k].subject_credits %></td>
+                              <td><%= value[k].grade_earned %></td>
+                            </tr>
+                          <% }) %>
+                    <%if(SGPA){%>
+                      <% all_sgpa+=parseFloat(SGPA);c+=1;%>
+                      <% sgpaArr.push(parseFloat(SGPA));%>
+                    <tr class="table-success ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td><%=SGPA%></td>
+                        </tr>
+                    <% }else{ %>
+                      <% sgpaArr.push(0);%>
+                    <tr class="table-danger ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td>FAIL</td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                    
+                </table>
+                     <%}%>
+                     <!-- sem 2-2 -->
+                    <% if(all_res[3] ){ %>
+                        <% let value=all_res[3]['3-1'] %>
+                        <% let SGPA=all_res[3]['SGPA'] %>
+                       
+                 <table class="table table-bordered" id="tableSem1_1">
+                    <thead >
+                        <tr >
+                         
+                          <th scope="col" class="table-primary" >3-1 Semster</th>
+                          
+                        </tr>
+                      </thead>
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">subject_code</th>
+                        <th scope="col">subject_name</th>
+                        <th scope="col">subject_credits</th>
+                        <th scope="col">grade_earned</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table_body_1_1">
+                        <% Object.keys(value).forEach((k) => { %>
+                            <tr>
+                              <td><%= value[k].subject_code %></td>
+                              <td><%= value[k].subject_name %></td>
+                              <td><%= value[k].subject_credits %></td>
+                              <td><%= value[k].grade_earned %></td>
+                            </tr>
+                          <% }) %>
+                    <%if(SGPA){%>
+                      <% sgpaArr.push(parseFloat(SGPA));%>
+                      <% all_sgpa+=parseFloat(SGPA);c+=1;%>
+                    <tr class="table-success ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td><%=SGPA%></td>
+                        </tr>
+                    <% }else{ %>
+                      <% sgpaArr.push(0);%>
+                    <tr class="table-danger ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td>FAIL</td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                    
+                </table>
+                     <%}%>
+                     <!-- sem 3-1 -->
+                    <% if(all_res[4] ){ %>
+                        <% let value=all_res[4]['3-2'] %>
+                        <% let SGPA=all_res[4]['SGPA'] %>
+                       
+                 <table class="table table-bordered" id="tableSem1_1">
+                    <thead >
+                        <tr >
+                         
+                          <th scope="col" class="table-primary" >3-2 Semster</th>
+                          
+                        </tr>
+                      </thead>
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">subject_code</th>
+                        <th scope="col">subject_name</th>
+                        <th scope="col">subject_credits</th>
+                        <th scope="col">grade_earned</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table_body_1_1">
+                        <% Object.keys(value).forEach((k) => { %>
+                            <tr>
+                              <td><%= value[k].subject_code %></td>
+                              <td><%= value[k].subject_name %></td>
+                              <td><%= value[k].subject_credits %></td>
+                              <td><%= value[k].grade_earned %></td>
+                            </tr>
+                          <% }) %>
+                    <%if(SGPA){%>
+                      <% sgpaArr.push(parseFloat(SGPA));%>
+                      <% all_sgpa+=parseFloat(SGPA);c+=1;%>
+                    <tr class="table-success ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td><%=SGPA%></td>
+                        </tr>
+                    <% }else{ %>
+                      <% sgpaArr.push(0);%>
+                    <tr class="table-danger ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td>FAIL</td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                    
+                </table>
+                     <%}%>
+                     <!-- sem 3-2 -->
+                    <% if(all_res[5] ){ %>
+                        <% let value=all_res[5]['4-1'] %>
+                        <% let SGPA=all_res[5]['SGPA'] %>
+                       
+                 <table class="table table-bordered" id="tableSem1_1">
+                    <thead >
+                        <tr >
+                         
+                          <th scope="col" class="table-primary" >4-1 Semster</th>
+                          
+                        </tr>
+                      </thead>
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">subject_code</th>
+                        <th scope="col">subject_name</th>
+                        <th scope="col">subject_credits</th>
+                        <th scope="col">grade_earned</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table_body_1_1">
+                        <% Object.keys(value).forEach((k) => { %>
+                            <tr>
+                              <td><%= value[k].subject_code %></td>
+                              <td><%= value[k].subject_name %></td>
+                              <td><%= value[k].subject_credits %></td>
+                              <td><%= value[k].grade_earned %></td>
+                            </tr>
+                          <% }) %>
+                    <%if(SGPA){%>
+                      <% all_sgpa+=parseFloat(SGPA);c+=1;%>
+                      <% sgpaArr.push(parseFloat(SGPA));%>
+                    <tr class="table-success ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td><%=SGPA%></td>
+                        </tr>
+                    <% }else{ %>
+                      <% sgpaArr.push(0);%>
+                    <tr class="table-danger ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td>FAIL</td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                    
+                </table>
+                     <%}%>
+                     <!-- sem 4-1 -->
+                    <% if(all_res[6] ){ %>
+                        <% let value=all_res[6]['4-2'] %>
+                        <% let SGPA=all_res[6]['SGPA'] %>
+                         
+                 <table class="table table-bordered" id="tableSem1_1">
+                    <thead >
+                        <tr >
+                         
+                          <th scope="col" class="table-primary" >4-2 Semster</th>
+                          
+                        </tr>
+                      </thead>
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">subject_code</th>
+                        <th scope="col">subject_name</th>
+                        <th scope="col">subject_credits</th>
+                        <th scope="col">grade_earned</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table_body_1_1">
+                        <% Object.keys(value).forEach((k) => { %>
+                            <tr>
+                              <td><%= value[k].subject_code %></td>
+                              <td><%= value[k].subject_name %></td>
+                              <td><%= value[k].subject_credits %></td>
+                              <td><%= value[k].grade_earned %></td>
+                            </tr>
+                          <% }) %>
+                    <%if(SGPA){%>
+                      <% sgpaArr.push(parseFloat(SGPA));%>
+                      <% all_sgpa+=parseFloat(SGPA);c+=1;%>
+                    <tr class="table-success ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td><%=SGPA%></td>
+                        </tr>
+                    <% }else{ %>
+                      <% sgpaArr.push(0);%>
+                    <tr class="table-danger ">
+                        <td></td>
+                            <td> </td>
+                            <td>SGPA:-</td>
+                            <td>FAIL</td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                    
+                </table>
+                     <%}%>
+                     <!-- sem 4-2 -->
+                     <% if(all_res[7]){ %>
+                      <% let value=all_res[7]['4-2'] %>
+                      <% let SGPA=all_res[7]['SGPA'] %>
+                      
+               <table class="table table-bordered" id="tableSem1_1">
+                  <thead >
+                      <tr >
+                       
+                        <th scope="col" class="table-primary" >4-2 Semster</th>
+                        
+                      </tr>
+                    </thead>
+                  <thead>
+                    <tr>
+                     
+                      <th scope="col">subject_code</th>
+                      <th scope="col">subject_name</th>
+                      <th scope="col">subject_credits</th>
+                      <th scope="col">grade_earned</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table_body_1_1">
+                      <% Object.keys(value).forEach((k) => { %>
+                          <tr>
+                            <td><%= value[k].subject_code %></td>
+                            <td><%= value[k].subject_name %></td>
+                            <td><%= value[k].subject_credits %></td>
+                            <td><%= value[k].grade_earned %></td>
+                          </tr>
+                        <% }) %>
+                  <%if(SGPA){%>
+                    <% sgpaArr.push(parseFloat(SGPA));%>
+                    <% all_sgpa+=parseFloat(SGPA);c+=1;%>
+                  <tr class="table-success ">
+                      <td></td>
+                          <td> </td>
+                          <td>SGPA:-</td>
+                          <td><%=SGPA%></td>
+                      </tr>
+                  <% }else{ %>
+                    <% sgpaArr.push(0);%>
+                  <tr class="table-danger ">
+                      <td></td>
+                          <td> </td>
+                          <td>SGPA:-</td>
+                          <td>FAIL</td>
+                      </tr>
+                      <%}%>
+                  </tbody>
+                  
+              </table>
+                   <%}%>
+                   <% // console.log(sgpaArr) %>
+                   <% const sems= ["1-1", "1-2", "2-1","2-2","3-1","3-2","4-1","4-2"]; %>
+                   <%if(all_gpa=="FAIL"&&c>1){%>
+                   <% console.log(all_sgpa,c,parseFloat(all_sgpa/c).toFixed(2) )%>
+                 
+                   <div class="text-center text-success"><h5>CGPA of <%=c%> Semsters:-  <%=parseFloat(all_sgpa/c).toFixed(3) %> </h5></div>
+                   <%}%>
+                    <% %>
+                   <div class="card">
+                    <div class="card-body">
+                      <h4>Your Result Graph</h4>
+                      <hr>
+                      <canvas id="myChart"  ></canvas>
+                    </div>
+                   </div>
+                    <script> 
+                     const ctx = document.getElementById('myChart');
+                     const myData = JSON.parse('<%- JSON.stringify(sgpaArr) %>');
+                        new Chart(ctx, {
+                           
+                          type: 'line',
+                          data: {
+                            labels: [ '1-2', '2-1', '2-2', '3-1', '3-2','4-1','4-2'],
+                            datasets: [{
+                              label: 'Line Graph',
+                              data:  myData ,
+                              borderWidth: 3,
+                              borderColor: 'rgba(0, 128, 255, 0.8)'
+                            }, {
+                            label: 'Bar Graph',
+                            data: myData,
+                            type: 'bar',
+                            backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(0, 255, 255, 0.2)', 'rgba(0,0,0, 0.2)'],
+                            borderColor:['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)', 'rgba(0, 255, 255, 1)', 'rgba(0,0,0, 1)'],
+                            // this dataset is drawn on top
+                            borderWidth: 1,
+                            barThickness:60,
+                            // this dataset is drawn on top
+                            order: 1
+                        }]
+                          },
+                          options: {
+                            animation: {
+        duration: 2000, // Set the duration of the animation (in milliseconds)
+        easing: 'easeInOutQuart' // Set the easing function for the animation
+      }, 
+                            scales: {
+                              y: {
+                                min: 0,
+                                max: 10,
+                                beginAtZero: false
+                              }
+                            }
+                          }
+                        });
+                      </script>
+                      <br>
+                      <p class="text-center"><button type="button" class="btn btn-primary" onclick="downloadPage()">Download</button></p>
+                      
+                      <div  class="text-center" >@Made with ❤ by <a href="/team">Team Invisible</a> </div>
+
+                       
+                       
+    <%}%>
+ 
+   
+   
+  </div>
+  <script>
+    function downloadPage() {
+      window.print();
+      //window.location.href = '/download';
+    }
+  </script>
+  </body>
+</html>

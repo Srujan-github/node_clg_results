@@ -50,8 +50,10 @@ try{
     // console.log(all_res[0]['1-1']);
     if(all_res[0]['1-1'])
     res.render('index', {bol,hallNo,tab1,all_gpa,all_res,url });
+    else if(all_res[0]['1-2'])
+    res.render('helpindex',{bol,hallNo,tab1,all_gpa,all_res,url });
     else
-    res.render('lateral',{bol,hallNo,tab1,all_gpa,all_res,url });
+      res.render('lateral',{bol,hallNo,tab1,all_gpa,all_res,url});
     // res.send('Received Hall Ticket Number: ' + hallNo);
   }catch(err){
     console.log(err);
@@ -73,3 +75,7 @@ app.get('/team',(req,res)=>{
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+app.use((req,res)=>{
+  res.render('404');
+})
