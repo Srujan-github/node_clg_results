@@ -36,12 +36,13 @@ try{
       all_gpa=overall_gpa?overall_gpa:"FAIL";
       tab1=details;
       if(!details){
-          res.status(404).render('404');
+          res.status(404).render('reload');
           return;
       }
       all_res=results;
     }else{
         console.log("error");
+        res.status(404).render('reload');
     }
     bol=false;
    
