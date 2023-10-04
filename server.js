@@ -78,5 +78,5 @@ app.listen(port, () => {
 });
 
 app.use((req,res)=>{
-  res.render('404');
+  res.status(404).render('404');
 })
