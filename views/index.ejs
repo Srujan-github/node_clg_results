@@ -101,10 +101,10 @@
         <tbody id="table_body_1_1">
           <% Object.keys(value).forEach((k)=> { %>
           <tr>
-            <td><%= value[k].subject_code %></td>
-            <td><%= value[k].subject_name %></td>
-            <td><%= value[k].subject_credits %></td>
-            <td><%= value[k].grade_earned %></td>
+            <td><%= !value[k].subject_code %></td>
+            <td><%= !value[k].subject_name %></td>
+            <td><%= !value[k].subject_credits %></td>
+            <td><%= !value[k].grade_earned %></td>
           </tr>
 
           <% }) %> <%if(SGPA){%> <% all_sgpa+=parseFloat(SGPA);c+=1; %> <%
@@ -148,10 +148,10 @@
         <tbody id="table_body_1_1">
           <% Object.keys(value).forEach((k)=> { %>
           <tr>
-            <td><%= value[k].subject_code %></td>
-            <td><%= value[k].subject_name %></td>
-            <td><%= value[k].subject_credits %></td>
-            <td><%= value[k].grade_earned %></td>
+            <td><%= value[k].subject_code ?value[k].subject_code :" " %></td>
+            <td><%= value[k].subject_name?value[k].subject_name :" " %></td>
+            <td><%= value[k].subject_credits ?value[k].subject_credits :" " %></td>
+            <td><%= value[k].grade_earned ?value[k].grade_earned :" " %></td>
           </tr>
           <% }) %> <%if(SGPA){%> <% all_sgpa+=parseFloat(SGPA);c+=1;%> <%
           sgpaArr.push(parseFloat(SGPA));%>
